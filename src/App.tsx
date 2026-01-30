@@ -5,15 +5,23 @@ import {
   CardFooter,
   CardHeader,
 } from "./components/ui/card";
+import { Cart } from "./lib/Cart";
 import { ChangeQtyButtons } from "./lib/ChangeQtyButtons";
 import { PRODUCTS_DATA } from "./lib/mockData";
+import { User } from "./lib/User";
 import { useStore } from "./store/store";
 
 function App() {
   const addProduct = useStore((state) => state.addProduct);
   const cartProducts = useStore((state) => state.products);
+
   return (
-    <main className="flex flex-col gap-3 dark bg-background h-screen max-w-sm mx-auto mt-2">
+    <main className="flex flex-col gap-3 dark bg-background h-screen max-w-sm mx-auto mt-4">
+      <div className="flex justify-between">
+        <User />
+        <Cart />
+      </div>
+
       <h1 className="text-2xl">Products:</h1>
       <div className="flex flex-col gap-2">
         {PRODUCTS_DATA.map((product) => (
