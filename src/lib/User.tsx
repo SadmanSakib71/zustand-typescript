@@ -8,17 +8,26 @@ import {
 } from "@/components/ui/popover";
 import { useStore } from "@/store/store";
 import { UserIcon } from "lucide-react";
+import { useEffect } from "react";
 import { useShallow } from "zustand/shallow";
 
 export function User() {
-  const { fullName, userName, address, setAddress } = useStore(
+  const { fullName, userName, address, setAddress, fetchUser } = useStore(
     useShallow((state) => ({
       fullName: state.fullName,
       userName: state.userName,
       address: state.address,
       setAddress: state.setAddress,
+      fetchUser: state.fetchUser,
     })),
   );
+
+  useEffect(() => {
+    async function fetchData() {
+      await fetchUser();
+    }
+    fetchData();
+  }, [fetchUser]);
 
   return (
     <div>
